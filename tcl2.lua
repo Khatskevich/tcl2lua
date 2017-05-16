@@ -941,7 +941,9 @@ function cmdfunc.do_test(result, cmd)
                 -- emit a shorter form
                 insert(result, format('test:do_%s_test(\n', nested[1]))
                 indent(result)
-                insert_indent(result, '"'..cmd[2]..'",\n')
+                insert_indent(result, '"')
+                insert_expr(result, cmd[2])
+                insert(result, '",\n')
                 insert_sql(result, nested[2], 'force_multi')
                 insert(result, ', ')
                 insert_result(result, cmd[4], cmd[2])
@@ -951,9 +953,11 @@ function cmdfunc.do_test(result, cmd)
         end
     end
     
-    insert(result, 'test:do_test(\n');
+    insert(result, 'test:do_test(\n')
     indent(result)
-    insert_indent(result, '"'..cmd[2]..'",\n')
+    insert_indent(result, '"')
+    insert_expr(result, cmd[2])
+    insert(result, '",\n')
     insert_indent(result, 'function()\n')
 
     indent(result)
@@ -974,7 +978,9 @@ function cmdfunc.do_execsql_test(result, cmd)
     if #cmd >= 3 then
         insert(result, 'test:do_execsql_test(\n')
         indent(result)
-        insert_indent(result, '"'..cmd[2]..'",\n')
+        insert_indent(result, '"')
+        insert_expr(result, cmd[2])
+        insert(result, '",\n')
         insert_sql(result, cmd[3], 'force_multi')
         if cmd[4] then
             insert(result, ', ')
@@ -990,7 +996,9 @@ function cmdfunc.do_catchsql_test(result, cmd)
     if #cmd == 4 then
         insert(result, 'test:do_catchsql_test(\n')
         indent(result)
-        insert_indent(result, '"'..cmd[2]..'",\n')
+        insert_indent(result, '"')
+        insert_expr(result, cmd[2])
+        insert(result, '",\n')
         insert_sql(result, cmd[3])
         insert(result, ', ')
         insert_result(result, cmd[4], cmd[2])
