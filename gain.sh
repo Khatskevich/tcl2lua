@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Usage: $0 convert_suite_stderr convert_suite_dst_dir
 
